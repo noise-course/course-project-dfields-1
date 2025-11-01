@@ -1,29 +1,25 @@
-# Project Title
+# Reproducing the nPrint OS Detection Task Benchmark Score
 
 ## Project Participants
 
-Format the following information in a markdown table:
-
-* First Name, Last Name
-* cnet ID
-* Project Role
+| First Name | Last Name | cnet ID | Project Role |
+|-------------|------------|---------|---------------|
+| Daniel | Fields | dfields | Sole Participant |
 
 ## Project Description
 
-One paragraph description of your project. Summarize the following:
-* Problem statement
-* Why it is important problem
-* How it relates to the theme of the course (e.g., what is the intersection
-  with networking and ML?).
-* Any related work you are aware of
-* What is the goal? Research? Tech transfer? Reproducing a result?
+In this project, I will attempt to re-produce the current leaderboard score for the nPrint OS Detection task. In this task, packets from the CICIDS 2017 dataset are grouped by source IP address before being partitioned into examples containing 100 packets, and each example is mapped to a label describing the operating system of its source device. The current leaderboard score for this task is a balanced accuracy metric of 77.1 obtained with the AutoML library, which automatically determines the optimal model and corresponding hyperparameters for a given task. I want to verify whether or not the data is linearly separable, so I will begin with linear models such as the Perceptron, the Support Vector Machine, and Logistic Regression. I will also use dimensionality reduction techniques such as Principal Components Analysis to further help me understand whether or not the data lends itself well to linear classifiers. If linear classification proves to be ineffective in producing a score close to that of the benchmark, I will switch to using a RandomForest model, which can use an ensemble of decision trees to make classification decisions on complex, non-linear datasets. Identifying the source operating system type of packets is an important problem to investigate from a security perspective: An enterprise might use OS detection to fingerprint and investigate potentially malicious communications, and at the same time, hackers might use OS detection to identify benign machines which are susceptible to certain exploits. Besides the current benchmark, I am not aware of any related work. This task relates to the overall theme of the course because it employs machine learning to classify groups of packets from a packet trace by their operating system type,  based on relevant network features.
 
 ## Data
 
-* What data will you need to complete this project?
+I will be using the dataset published on the nPrint OS Detection Task website, which can be parsed with pcapml to obtain each sample and its corresponding label, which in this case is the example’s OS. I will then parse this dataset into a Pandas dataframe before beginning the classification task.
 
 ## Deliverables
 
-* Detail what you intend to turn in for the final project. (Refer to the
-  documentation about the project to outline your deliverables.)
+For the final project, I will turn in a notebook containing my code that prepares 
+the dataset, performs classification which each of the models I have chosen, and
+evaluates each model in the same way as the benchmark. Like the creators of the benchmark, I will split the dataset into a 75% train split and a 25% test split for model evaluation. Consistent with the creators, I will use the standard multi-class classification evaluation metrics of balanced accuracy, ROC AUC, and macro F1-score, and I will also make sure to plot a confusion matrix to examine the specific counts of correct and incorrect classifications among each class. I will also plot a multi-class ROC curve for each model to examine how changing the threshold of each model might affect true positive rates and false positive rates. I will then present a comparison between the balanced accuracy, ROC AUC, and Macro F1 metrics obtained by the benchmark creators along with the metrics I obtained, along with an analysis of these results and what I have discovered about the data.
+
+
+  
 
